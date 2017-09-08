@@ -1,0 +1,40 @@
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "gradle.plugin.us.ihmc.gradle:ihmc-build:0.0.18"
+  }
+}
+
+apply plugin: "us.ihmc.gradle.ihmc-build"
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+repositories ihmc.ihmcDefaultArtifactProxies()
+
+repositories {
+    mavenLocal()
+    jcenter()
+    mavenCentral()
+    maven {
+        url "http://artifactory.ihmc.us/artifactory/thirdparty/"
+    }
+}
+
+dependencies {
+	testCompile group: 'junit', name: 'junit', version: '4.11'
+	
+	compile ihmc.getProjectDependency(":IHMCJavaToolkit")
+	
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'
+    compile group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.5.3'
+    compile group: 'org.glassfish.tyrus.bundles', name: 'tyrus-standalone-client', version: '1.13.1'
+    compile group: 'javax.websocket', name: 'javax.websocket-api', version: '1.1'
+    compile group: 'org.json', name: 'json', version: '20090211'
+    compile group: 'com.google.code.gson', name: 'gson', version: '1.7.2'
+    compile group: 'com.fasterxml', name: 'jackson-module-json-org', version: '0.9.1'
+}
